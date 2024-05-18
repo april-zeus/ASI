@@ -160,3 +160,43 @@ cython_debug/
 #  option (not recommended) you can uncomment the following to ignore the entire idea folder.
 .idea/
 
+# Virtual environment
+.venv/
+
+# Jupyter Notebook checkpoints
+.ipynb_checkpoints/
+
+# Kedro logs and cache
+logs/
+.kedro/
+local/
+data/
+data/01_raw/
+data/02_intermediate/
+data/03_primary/
+data/04_feature/
+data/05_model_input/
+data/06_models/
+data/07_model_output/
+data/08_reporting/
+AutogluonModels/
+wandb/
+wandb/latest-run
+churn-modelling-kedro/database.db
+
+# Config files
+conf/local/
+conf/.ipynb_checkpoints/
+
+# IPython history
+.ipython/
+
+# Jupyter Notebook metadata
+jupyter-metadata/
+
+# MacOS specific files
+.DS_Store
+
+# Windows specific files
+Thumbs.db
+
