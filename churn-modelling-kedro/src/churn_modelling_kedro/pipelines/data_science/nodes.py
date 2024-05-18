@@ -14,5 +14,5 @@ def train_model(train_data: TabularDataset) -> TabularPredictor:
 def test_model(predictor: TabularPredictor, test_data: DataFrame) -> DataFrame:
     predictions = DataFrame(predictor.predict(data=test_data, as_pandas=True))
     predictions.rename(columns={"Exited": "Prediction"}, inplace=True)
-    predictions = concat([predictions, test_data["Potability"]], axis=1)
+    predictions = concat([predictions, test_data["Exited"]], axis=1)
     return predictions

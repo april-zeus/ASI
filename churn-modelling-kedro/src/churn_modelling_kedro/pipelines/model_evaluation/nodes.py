@@ -1,51 +1,50 @@
-import numpy as np
 import pandas as pd
-import matplotlib.pyplot as plt
+import wandb
 from sklearn.metrics import accuracy_score, precision_score, recall_score, f1_score, roc_auc_score
 
-def evaluate_model(predictions: pd.DataFrame, test_labels: pd.DataFrame):
-    # conf_mat = confusion_matrix(predictions, test_labels)
-    #
-    # print("True Positive : ", conf_mat[1, 1])
-    # print("True Negative : ", conf_mat[0, 0])
-    # print("False Positive: ", conf_mat[0, 1])
-    # print("False Negative: ", conf_mat[1, 0])
-    #
-    # # Plotting AUC ROC Curve
-    # def generate_auc_roc_curve(clf, x_test):
-    #     y_pred_proba = clf.predict_proba(x_test)[:, 1]
-    #     fpr, tpr, thresholds = roc_curve(test_labels, y_pred_proba)
-    #     auc = roc_auc_score(test_labels, y_pred_proba)
-    #     plt.plot(fpr, tpr, label="AUC ROC Curve with Area Under the curve =" + str(auc))
-    #     plt.legend(loc=4)
-    #     plt.show()
-    #
-    # return generate_auc_roc_curve(model_GB, predictions)
 
+def evaluate_model(predictions: pd.DataFrame,
+    project_name='Kedro-ASI-Test-Autogluon',
+    learning_rate=0.01,
+    epochs=10,
+    log_additional_info=False) -> (pd.DataFrame, pd.DataFrame):
+    # Initialize WandB run
+    run = wandb.init(project=project_name, config={"learning_rate": learning_rate, "epochs": epochs})
 
-    accuracy = accuracy_score(predictions['Potability'], predictions['Prediction'])
-    precision = precision_score(predictions['Potability'], predictions['Prediction'])
-    recall = recall_score(predictions['Potability'], predictions['Prediction'])
-    f1 = f1_score(predictions['Potability'], predictions['Prediction'])
-    confusion_matrix = pd.crosstab(
-        predictions['Potability'],
-        predictions['Prediction'],
-        rownames=['Actual'],
-        colnames=['Predicted']
-    )
+    try:
+    # Calculating metrics
 
-    # Log metrics
-    wandb.log({"conf_mat": wandb.plot.confusion_matrix(probs=None, y_true=predictions['Potability'].values,
-                                                       preds=predictions['Prediction'].values,
-                                                       class_names=['0', '1']),
-               "accuracy": accuracy,
-               "precision": precision,
-               "recall": recall,
-               "f1_score": f1})
+        accuracy = accuracy_score(predictions['Exited'], predictions['Prediction'])
+        precision = precision_score(predictions['Exited'], predictions['Prediction'])
+        recall = recall_score(predictions['Exited'], predictions['Prediction'])
+        f1 = f1_score(predictions['Exited'], predictions['Prediction'])
+        confusion_matrix = pd.crosstab(
+            predictions['Exited'],
+            predictions['Prediction'],
+            rownames=['Actual'],
+            colnames=['Predicted']
+        )
 
-    return pd.DataFrame({
-        'accuracy': [accuracy],
-        'precision': [precision],
-        'recall': [recall],
-        'f1_score': [f1]
-    }), confusion_matrix
+        # Log metrics
+        if log_additional_info:
+            wandb.log({"conf_mat": wandb.plot.confusion_matrix(probs=None, y_true=predictions['Exited'].values,
+                                                               preds=predictions['Prediction'].values,
+                                                               class_names=['0', '1']),
+                       "accuracy": accuracy,
+                       "precision": precision,
+                       "recall": recall,
+                       "f1_score": f1})
+
+        return pd.DataFrame({
+            'accuracy': [accuracy],
+            'precision': [precision],
+            'recall': [recall],
+            'f1_score': [f1]
+        }), confusion_matrix
+
+    except KeyError as e:
+        print(f"KeyError: {e}. Ensure 'Potability' and 'Prediction' are in predictions_test.")
+    except Exception as e:
+        print(f"An error occurred: {e}")
+    finally:
+        run.finish()
