@@ -1,0 +1,20 @@
+ipython>=8.10
+jupyterlab>=3.0
+kedro~=0.19.5
+kedro-datasets>=3.0; python_version >= "3.9"
+kedro-datasets>=1.0; python_version < "3.9"
+kedro-telemetry>=0.3.1
+kedro-viz>=6.7.0
+notebook
+pytest~=8.2.0
+pytest-cov~=3.0
+pytest-mock>=1.7.1, <2.0
+ruff~=0.1.8
+setuptools; python_version >= "3.10"
+
+pandas~=2.2.2
+matplotlib~=3.9.0
+scikit-learn~=1.4.0
+lightgbm~=4.3.0
+autogluon~=1.1.0
+numpy~=1.26.4
