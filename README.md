@@ -38,7 +38,7 @@ deactivate
 * Instalacja Kedro i Kedro Viz ✅
 * Instalacja pozostałych paczek ML-owych ⚙️
 * Konfiguracja pipeline'ów ⚙️
-  * data_engineering pipeline ⚙️ (TODO: dodać preprocessing danych)
+  * data_engineering pipeline ✅
   * data_science pipeline ✅
   * model_evaluation pipeline ⚙️
   * model_retraining pipeline ⚙️
