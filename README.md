@@ -9,7 +9,8 @@ Autorzy:
 
 [TODO: Dokumentacja techniczna »](./docs/TODO-dokumentacja-techniczna.pdf)
 
-Projekt służy do tworzenia modeli do predykcji rezygnacji z usługi konta bankowego na podstawie danych dostępnych w serwisie Kaggle. 
+Projekt służy do tworzenia modeli do predykcji rezygnacji z usługi konta bankowego na podstawie danych dostępnych w serwisie [Kaggle](https://www.kaggle.com/code/simgeerek/churn-prediction-using-machine-learning/input). 
+
 
 Projekt korzysta z:
 * SQLite - baza danych
