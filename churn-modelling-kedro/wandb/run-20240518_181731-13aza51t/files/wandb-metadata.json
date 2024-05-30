@@ -1,0 +1,50 @@
+{
+    "os": "macOS-14.2.1-arm64-arm-64bit",
+    "python": "3.10.14",
+    "heartbeatAt": "2024-05-18T16:17:33.529234",
+    "startedAt": "2024-05-18T16:17:31.959119",
+    "docker": null,
+    "cuda": null,
+    "args": [
+        "run"
+    ],
+    "state": "running",
+    "program": "-m kedro.__main__",
+    "codePathLocal": null,
+    "git": {
+        "remote": "https://github.com/april-zeus/ASI.git",
+        "commit": "55267e66513f78d775eece29ba7b81f4085cc06a"
+    },
+    "email": "konrad@webalize.me",
+    "root": "/Users/konradreperowski/PJATK/ASI",
+    "host": "MacBook-Pro-Konrad.local",
+    "username": "konradreperowski",
+    "executable": "/Users/konradreperowski/PJATK/ASI/.venv/bin/python",
+    "cpu_count": 8,
+    "cpu_count_logical": 8,
+    "cpu_freq": {
+        "current": 3228,
+        "min": 600,
+        "max": 3228
+    },
+    "cpu_freq_per_core": [
+        {
+            "current": 3228,
+            "min": 600,
+            "max": 3228
+        }
+    ],
+    "disk": {
+        "/": {
+            "total": 460.4317207336426,
+            "used": 13.366661071777344
+        }
+    },
+    "gpuapple": {
+        "type": "Apple M1 Pro",
+        "vendor": "sppci_vendor_Apple"
+    },
+    "memory": {
+        "total": 16.0
+    }
+}

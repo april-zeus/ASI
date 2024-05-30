@@ -7,7 +7,7 @@ def evaluate_model(predictions: pd.DataFrame,
     project_name='Kedro-ASI-Test-Autogluon',
     learning_rate=0.01,
     epochs=10,
-    log_additional_info=False) -> (pd.DataFrame, pd.DataFrame):
+    log_additional_info=True) -> (pd.DataFrame, pd.DataFrame):
     # Initialize WandB run
     run = wandb.init(project=project_name, config={"learning_rate": learning_rate, "epochs": epochs})
 

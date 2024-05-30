@@ -12,42 +12,49 @@
 # https://docs.kedro.org/en/stable/data/data_catalog.html
 
 raw_data:
-  type: pandas.SQLTableDataSet
+  type: pandas.SQLTableDataset
   table_name: raw_data
   credentials: db-credentials
   save_args:
     if_exists: replace
 
+processed_data:
+  type: pandas.SQLTableDataset
+  table_name: processed_data
+  credentials: db-credentials
+  save_args:
+    if_exists: replace
+
 train_data:
-  type: pandas.SQLTableDataSet
+  type: pandas.SQLTableDataset
   table_name: train_data
   credentials: db-credentials
   save_args:
     if_exists: replace
 
 test_data:
-  type: pandas.SQLTableDataSet
+  type: pandas.SQLTableDataset
   table_name: test_data
   credentials: db-credentials
   save_args:
     if_exists: replace
 
 evaluation_metrics:
-    type: pandas.SQLTableDataSet
+    type: pandas.SQLTableDataset
     table_name: evaluation_metrics
     credentials: db-credentials
     save_args:
         if_exists: replace
 
 confusion_matrix:
-    type: pandas.SQLTableDataSet
+    type: pandas.SQLTableDataset
     table_name: confusion_matrix
     credentials: db-credentials
     save_args:
         if_exists: replace
 
 synth_data:
-  type: pandas.SQLTableDataSet
+  type: pandas.SQLTableDataset
   table_name: synth_data
   credentials: db-credentials
   save_args:
