@@ -31,32 +31,6 @@ def process_data(df: DataFrame) -> DataFrame:
     # Dropping unnecessary variables
     df = df.drop(["CustomerId", "Surname"], axis=1)
 
-    # Robust scaling
-    def robust_scaler(variable: DataFrame) -> DataFrame:
-        var_median = variable.median()
-        quartile1 = variable.quantile(0.25)
-        quartile3 = variable.quantile(0.75)
-        interquantile_range = quartile3 - quartile1
-        if interquantile_range == 0:
-            quartile1 = variable.quantile(0.05)
-            quartile3 = variable.quantile(0.95)
-            interquantile_range = quartile3 - quartile1
-            if interquantile_range == 0:
-                quartile1 = variable.quantile(0.01)
-                quartile3 = variable.quantile(0.99)
-                interquantile_range = quartile3 - quartile1
-        z = (variable - var_median) / interquantile_range
-        return round(z, 3)
-
-    # Identify numerical columns to scale
-    columns_to_scale = df.select_dtypes(include=['float64', 'int64']).columns
-    like_num = [col for col in columns_to_scale if len(df[col].value_counts()) <= 10]
-    columns_to_scale = [col for col in columns_to_scale if col not in ["Gender_Male", "Geography_Germany", "Geography_Spain"]
-                        and col != "Exited" and col not in like_num]
-
-    for col in columns_to_scale:
-        df[col] = robust_scaler(df[col])
-
     return df
 
 def split_data(df: DataFrame) -> Tuple[DataFrame, DataFrame]:

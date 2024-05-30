@@ -43,7 +43,7 @@ def evaluate_model(predictions: pd.DataFrame,
         }), confusion_matrix
 
     except KeyError as e:
-        print(f"KeyError: {e}. Ensure 'Potability' and 'Prediction' are in predictions_test.")
+        print(f"KeyError: {e}. Ensure 'Exited' and 'Prediction' are in predictions_test.")
     except Exception as e:
         print(f"An error occurred: {e}")
     finally:

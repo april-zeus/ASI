@@ -1,5 +1,12 @@
 # churn-modelling-kedro
 
+## Run for presentation
+```bash
+run python launcher.py script
+```
+Streamlit app will be open in browser on URL http://localhost:8501/ and you will be able to manage software from this web panel.
+
+
 ## Overview
 
 This is your new Kedro project with Kedro-Viz and PySpark setup, which was generated using `kedro 0.19.5`.

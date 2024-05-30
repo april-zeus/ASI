@@ -20,3 +20,7 @@ autogluon~=1.1.0
 numpy~=1.26.4
 pyspark~=3.5.1
 wandb~=0.17.0
+fastapi~=0.111.0
+streamlit~=1.35.0
+uvicorn~=0.29.0
+requests~=2.31.0
