@@ -3,9 +3,10 @@ import urllib.request
 import pickle
 import pandas as pd
 
-fast_api_model_url = "http://127.0.0.1:8000/model_download"
-model = pickle.load(urllib.request.urlopen(fast_api_model_url))
-print(model)
+# TODO: uncomment
+# fast_api_model_url = "http://127.0.0.1:8000/model_download"
+# model = pickle.load(urllib.request.urlopen(fast_api_model_url))
+# print(model)
 
 st.set_page_config(page_title="Churn Prediction App")
 
@@ -13,6 +14,8 @@ overview = st.container()
 left, right = st.columns(2)
 prediction = st.container()
 
+geography_d = {0: "France", 1: "Germany", 2: "Spain"}
+gender_d = {0: "Female", 1: "Male"}
 has_credit_card_d = {0: "No", 1: "Yes"}
 is_active_member_d = {0: "No", 1: "Yes"}
 
@@ -38,6 +41,8 @@ with right:
 
     new_tenure = tenure / age
 
+    print(pd.qcut(credit_score, 6, labels=[1, 2, 3, 4, 5, 6]))
+
     data = pd.DataFrame({
         "CreditScore": [credit_score],
         "Geography": [geography],
@@ -49,12 +54,14 @@ with right:
         "HasCrCard": [has_credit_card],
         "IsActiveMember": [is_active_member],
         "EstimatedSalary": [estimated_salary],
-        "NewTenure": [new_tenure]
+        "NewTenure": [new_tenure],
     })
 
-    pred = model.predict(data)
-    s_confidence = model.predict_proba(data)
+    # TODO: uncomment
+    # pred = model.predict(data)
+    # s_confidence = model.predict_proba(data)
 
-    with prediction:
-        st.header("Will the person resign? {0}".format("Yes" if pred[0] == 1 else "No"))
-        st.subheader("Prediction confidence {0:.2f} %".format(s_confidence[0][pred][0] * 100))
+    # TODO: uncomment
+    # with prediction:
+        # st.header("Will the person resign? {0}".format("Yes" if pred[0] == 1 else "No"))
+        # st.subheader("Prediction confidence {0:.2f} %".format(s_confidence[0][pred][0] * 100))
