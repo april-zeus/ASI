@@ -24,3 +24,4 @@ fastapi~=0.111.0
 streamlit~=1.35.0
 uvicorn~=0.29.0
 requests~=2.31.0
+sdv~=1.13.1
