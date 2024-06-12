@@ -2,16 +2,7 @@
 This is a boilerplate pipeline 'data_engineering'
 generated using Kedro 0.19.5
 """
-
 from pandas import DataFrame, read_csv, qcut, get_dummies
-from sklearn.model_selection import train_test_split
-from typing import Tuple
-from autogluon.tabular import TabularDataset
-
-def load_data() -> DataFrame:
-    file_name = "churn-data.csv"
-    dataset = read_csv(file_name)
-    return dataset
 
 def process_data(df: DataFrame) -> DataFrame:
     # Handle missing values
@@ -33,8 +24,4 @@ def process_data(df: DataFrame) -> DataFrame:
 
     return df
 
-def split_data(df: DataFrame) -> Tuple[DataFrame, DataFrame]:
-    train, test = train_test_split(df, test_size=0.1, random_state=42)  # Ensuring reproducibility
-    train = TabularDataset(train)
-    test = TabularDataset(test)
-    return train, test
+

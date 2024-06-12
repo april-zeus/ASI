@@ -1,5 +1,13 @@
 # Projekt z przedmiotu “Architektury rozwiązań i wdrożeń SI”
 
+## Run for presentation
+```bash
+python launcher.py script
+```
+Streamlit app will be open in browser on URL http://localhost:8501/ and you will be able to manage software from this web panel.
+
+
+
 ## Churn modelling
 
 Autorzy:
