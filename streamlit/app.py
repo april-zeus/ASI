@@ -3,10 +3,9 @@ import urllib.request
 import pickle
 import pandas as pd
 
-# TODO: uncomment
-# fast_api_model_url = "http://127.0.0.1:8000/model_download"
-# model = pickle.load(urllib.request.urlopen(fast_api_model_url))
-# print(model)
+fast_api_model_url = "http://127.0.0.1:8000/model_download"
+model = pickle.load(urllib.request.urlopen(fast_api_model_url))
+print(model)
 
 st.set_page_config(page_title="Churn Prediction App")
 
@@ -26,8 +25,8 @@ with overview:
     )
 
 with left:
-    geography = st.selectbox("Geography", options=["France", "Spain", "Germany"])
-    gender = st.selectbox("Gender", options=["Female", "Male"])
+    geography = st.selectbox("Geography", list(geography_d.keys()), format_func=lambda x: geography_d[x])
+    gender = st.selectbox("Gender", list(gender_d.keys()), format_func=lambda x: gender_d[x])
     has_credit_card = st.selectbox("Has credit card", list(has_credit_card_d.keys()), format_func=lambda x: has_credit_card_d[x])
     is_active_member = st.selectbox("Is active member", list(is_active_member_d.keys()), format_func=lambda x: is_active_member_d[x])
 
@@ -40,8 +39,6 @@ with right:
     estimated_salary = st.slider("Estimated salary", value=100000, min_value=10, max_value=200000, step=1)
 
     new_tenure = tenure / age
-
-    print(pd.qcut(credit_score, 6, labels=[1, 2, 3, 4, 5, 6]))
 
     data = pd.DataFrame({
         "CreditScore": [credit_score],
@@ -57,11 +54,9 @@ with right:
         "NewTenure": [new_tenure],
     })
 
-    # TODO: uncomment
-    # pred = model.predict(data)
-    # s_confidence = model.predict_proba(data)
+    pred = model.predict(data)
+    s_confidence = model.predict_proba(data)
 
-    # TODO: uncomment
-    # with prediction:
-        # st.header("Will the person resign? {0}".format("Yes" if pred[0] == 1 else "No"))
-        # st.subheader("Prediction confidence {0:.2f} %".format(s_confidence[0][pred][0] * 100))
+    with prediction:
+        st.header("Will the person resign? {0}".format("Yes" if pred[0] == 1 else "No"))
+        st.subheader("Prediction confidence {0:.2f} %".format(s_confidence[0][pred][0] * 100))

@@ -3,10 +3,9 @@ This is a boilerplate pipeline 'data_science'
 generated using Kedro 0.19.5
 """
 import pickle
-from pandas import DataFrame, concat
+from pandas import concat
 from autogluon.tabular import TabularPredictor
-from autogluon.tabular import TabularDataset
-from pandas import DataFrame, read_csv, qcut, get_dummies
+from pandas import DataFrame
 from sklearn.model_selection import train_test_split
 from typing import Tuple
 from autogluon.tabular import TabularDataset
@@ -18,7 +17,7 @@ def split_data(df: DataFrame) -> Tuple[DataFrame, DataFrame]:
     return train, test
 
 def train_model(synthetic_train_data: TabularDataset) -> TabularPredictor:
-    predictor = TabularPredictor(label="Exited", eval_metric="balanced_accuracy").fit(train_data=synthetic_train_data)
+    predictor = TabularPredictor(label="Exited", eval_metric="balanced_accuracy").fit(train_data=synthetic_train_data, keep_only_best=True)
     return predictor
 
 def test_model(predictor: TabularPredictor, test_data: DataFrame) -> DataFrame:
@@ -28,5 +27,7 @@ def test_model(predictor: TabularPredictor, test_data: DataFrame) -> DataFrame:
     return predictions
 
 def save_model(predictor: TabularPredictor):
-    filename = "model2.h5"
-    pickle.dump(predictor, open(filename, "wb"))
+    filename = "model.pkl"
+    best_model = predictor.get_model_best()
+    best_model_path = predictor._trainer.load_model(best_model)
+    pickle.dump(best_model_path, open(filename, "wb"))

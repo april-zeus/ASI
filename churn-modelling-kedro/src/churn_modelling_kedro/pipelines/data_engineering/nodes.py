@@ -2,7 +2,10 @@
 This is a boilerplate pipeline 'data_engineering'
 generated using Kedro 0.19.5
 """
-from pandas import DataFrame, read_csv, qcut, get_dummies
+import pandas as pd
+from pandas import DataFrame, get_dummies, concat
+from sklearn.preprocessing import LabelEncoder
+
 
 def process_data(df: DataFrame) -> DataFrame:
     # Handle missing values
@@ -10,17 +13,19 @@ def process_data(df: DataFrame) -> DataFrame:
 
     # Feature engineering
     df["NewTenure"] = df["Tenure"] / df["Age"]
-    df["NewCreditsScore"] = qcut(df['CreditScore'], 6, labels=[1, 2, 3, 4, 5, 6])
-    df["NewAgeScore"] = qcut(df['Age'], 8, labels=[1, 2, 3, 4, 5, 6, 7, 8])
-    df["NewBalanceScore"] = qcut(df['Balance'].rank(method="first"), 5, labels=[1, 2, 3, 4, 5])
-    df["NewEstSalaryScore"] = qcut(df['EstimatedSalary'], 10, labels=[1, 2, 3, 4, 5, 6, 7, 8, 9, 10])
 
-    # One hot encoding
-    columns_to_encode = ["Gender", "Geography"]
-    df = get_dummies(df, columns=columns_to_encode, drop_first=True)
+    print(df)
+
+    lab_enc_2 = LabelEncoder()
+    df["Gender"] = lab_enc_2.fit_transform(df["Gender"])
+
+    lab_enc = LabelEncoder()
+    df["Geography"] = lab_enc.fit_transform(df["Geography"])
 
     # Dropping unnecessary variables
-    df = df.drop(["CustomerId", "Surname"], axis=1)
+    df = df.drop(["RowNumber", "CustomerId", "Surname"], axis=1)
+
+    print(df)
 
     return df
 
