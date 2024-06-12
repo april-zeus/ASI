@@ -9,4 +9,4 @@ async def root():
 
 @app.get("/model_download")
 async def model():
-    return FileResponse("churn-modelling-kedro/model.pkl", filename="model.pkl", media_type="application/octet-stream")
+    return FileResponse("churn-modelling-kedro/predictor.pkl", filename="predictor.pkl", media_type="application/octet-stream")

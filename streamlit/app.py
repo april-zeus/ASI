@@ -4,8 +4,7 @@ import pickle
 import pandas as pd
 
 fast_api_model_url = "http://127.0.0.1:8000/model_download"
-model = pickle.load(urllib.request.urlopen(fast_api_model_url))
-print(model)
+predictor = pickle.load(urllib.request.urlopen(fast_api_model_url))
 
 st.set_page_config(page_title="Churn Prediction App")
 
@@ -54,8 +53,8 @@ with right:
         "NewTenure": [new_tenure],
     })
 
-    pred = model.predict(data)
-    s_confidence = model.predict_proba(data)
+    pred = predictor.predict(data)
+    s_confidence = predictor.predict_proba(data)
 
     with prediction:
         st.header("Will the person resign? {0}".format("Yes" if pred[0] == 1 else "No"))
