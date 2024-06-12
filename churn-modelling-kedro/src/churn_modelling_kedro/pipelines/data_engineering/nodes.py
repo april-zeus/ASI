@@ -14,8 +14,6 @@ def process_data(df: DataFrame) -> DataFrame:
     # Feature engineering
     df["NewTenure"] = df["Tenure"] / df["Age"]
 
-    print(df)
-
     lab_enc_2 = LabelEncoder()
     df["Gender"] = lab_enc_2.fit_transform(df["Gender"])
 
@@ -24,8 +22,6 @@ def process_data(df: DataFrame) -> DataFrame:
 
     # Dropping unnecessary variables
     df = df.drop(["RowNumber", "CustomerId", "Surname"], axis=1)
-
-    print(df)
 
     return df
 
