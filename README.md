@@ -60,3 +60,7 @@ kedro viz
 ```
 
 ![kedro-pipeline.png](kedro-pipeline.png)
+
+## Architektura projektu
+
+![architecture.png](architecture.png)
