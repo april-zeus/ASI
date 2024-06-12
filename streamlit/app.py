@@ -58,4 +58,4 @@ with right:
 
     with prediction:
         st.header("Will the person resign? {0}".format("Yes" if pred[0] == 1 else "No"))
-        st.subheader("Prediction confidence {0:.2f} %".format(s_confidence[0][pred][0] * 100))
+        st.subheader("Prediction confidence {0:.2f} %".format(s_confidence[pred[0]][0] * 100))
