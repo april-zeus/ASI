@@ -4,11 +4,17 @@ generated using Kedro 0.19.5
 """
 
 from kedro.pipeline import Pipeline, pipeline, node
-from .nodes import train_model, test_model
+from .nodes import train_model, test_model, split_data, save_model
 
 
 def create_pipeline(**kwargs) -> Pipeline:
     return pipeline([
+        node(
+            func=split_data,
+            inputs="processed_data",
+            outputs=["train_data", "test_data"],
+            name="split_data_node"
+        ),
         node(
             func=train_model,
             inputs="train_data",
@@ -20,5 +26,11 @@ def create_pipeline(**kwargs) -> Pipeline:
             inputs=["predictor", "test_data"],
             outputs="predictions",
             name="predictions_creation"
-        )
+        ),
+        node(
+            func=save_model,
+            inputs=["predictor"],
+            outputs=None,
+            name="model_saving"
+        ),
     ])
