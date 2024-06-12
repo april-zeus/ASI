@@ -4,7 +4,7 @@ generated using Kedro 0.19.5
 """
 
 from kedro.pipeline import Pipeline, pipeline, node
-from .nodes import train_model, test_model
+from .nodes import train_model, test_model, save_model
 
 
 def create_pipeline(**kwargs) -> Pipeline:
@@ -20,5 +20,11 @@ def create_pipeline(**kwargs) -> Pipeline:
             inputs=["predictor", "test_data"],
             outputs="predictions",
             name="predictions_creation"
-        )
+        ),
+        node(
+            func=save_model,
+            inputs=["predictor"],
+            outputs=None,
+            name="model_saving"
+        ),
     ])

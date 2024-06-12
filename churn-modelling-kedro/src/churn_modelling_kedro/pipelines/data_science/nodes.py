@@ -2,7 +2,7 @@
 This is a boilerplate pipeline 'data_science'
 generated using Kedro 0.19.5
 """
-
+import pickle
 from pandas import DataFrame, concat
 from autogluon.tabular import TabularPredictor
 from autogluon.tabular import TabularDataset
@@ -16,3 +16,7 @@ def test_model(predictor: TabularPredictor, test_data: DataFrame) -> DataFrame:
     predictions.rename(columns={"Exited": "Prediction"}, inplace=True)
     predictions = concat([predictions, test_data["Exited"]], axis=1)
     return predictions
+
+def save_model(predictor: TabularPredictor):
+    filename = "model2.h5"
+    pickle.dump(predictor, open(filename, "wb"))
