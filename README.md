@@ -42,6 +42,22 @@ deactivate
 * CONFUSION_MATRIX_TABLE_NAME=confusion_matrix
 * SYNTH_TABLE_NAME=synth_data
 
+### Dane:
+
+* RowNumber: odpowiada numerowi rekordu (wiersza) i nie ma wpływu na wynik.
+* CustomerId: zawiera losowe wartości i nie ma wpływu na to, czy klient odejdzie z banku.
+* CreditScore: może mieć wpływ na odejście klienta, ponieważ klient z wyższą oceną kredytową jest mniej skłonny do opuszczenia banku.
+* Geography: lokalizacja klienta może wpływać na jego decyzję o odejściu z banku.
+* Gender: interesujące jest zbadanie, czy płeć ma wpływ na odejście klienta z banku.
+* Age: jest to z pewnością istotne, ponieważ starsi klienci są mniej skłonni do opuszczenia banku niż młodsi.
+* Tenure: odnosi się do liczby lat, przez które klient jest klientem banku. Zazwyczaj starsi klienci są bardziej lojalni i mniej skłonni do opuszczenia banku.
+* Balance: również jest bardzo dobrym wskaźnikiem odejścia klienta, ponieważ osoby z wyższym saldem na kontach są mniej skłonne do opuszczenia banku w porównaniu z tymi, którzy mają niższe salda.
+* NumOfProducts: odnosi się do liczby produktów, które klient zakupił za pośrednictwem banku.
+* HasCrCard: oznacza, czy klient posiada kartę kredytową. Ta kolumna jest również istotna, ponieważ osoby z kartą kredytową są mniej skłonne do opuszczenia banku.
+* IsActiveMember: aktywni klienci są mniej skłonni do opuszczenia banku.
+* EstimatedSalary: podobnie jak w przypadku salda, osoby o niższych dochodach są bardziej skłonne do opuszczenia banku w porównaniu z tymi, którzy mają wyższe wynagrodzenia.
+* Exited: czy klient opuścił bank. (0 = Nie, 1 = Tak)
+
 ## Instalacja i uruchomienie
 
 ```bash
